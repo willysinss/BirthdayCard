@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap");
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    background: #FDE3A7; 
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+}
+
+::selection {
+    background: transparent;
+}
+
+/* =========================================
+   SLIDER SECTION (ACCORDION)
+========================================= */
+.slider-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slider-images {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.slider-img {
+    width: 90px;
+    height: 550px;
+    background-color: #92A29C; 
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.7s ease;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.slider-title {
+    font-family: "Jost", sans-serif;
+    font-size: 35px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    white-space: nowrap;
+    transition: 0.5s ease;
+    letter-spacing: 2px;
+}
+
+.slider-img.active {
+    width: 800px;
+    background-color: transparent;
+    box-shadow: none;
+    cursor: default;
+}
+
+.slider-img.active .slider-title {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* =========================================
+   3D CARD SECTION
+========================================= */
+.card-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 150px; 
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+
+.slider-img.active .card-wrapper {
+    opacity: 1;
+    pointer-events: auto;
+    transition-delay: 0.4s;
+}
+
+.card {
+    font-family: 'Indie Flower', cursive !important;
+    color: #013243; 
+    position: relative; 
+    width: 300px;
+    height: 400px;
+    background: #e0e1dc;
+    transform-style: preserve-3d;
+    transform: perspective(2000px); 
+    box-shadow: inset 300px 0 50px rgba(0,0,0,.5), 20px 0 60px rgba(0,0,0,.5);
+    transition: 1s;
+}
+
+.card:hover {
+    transform: perspective(2000px) rotate(15deg) scale(1.1);
+    box-shadow: inset 20px 0 50px rgba(0,0,0,.5), 0 10px 100px rgba(0,0,0,.5);
+	background-color: #cbcbcb;
+}
+
+.card:hover .imgBox img, 
+.card:hover .imgBox h1, 
+.card:hover .imgBox h2, 
+.card:hover .imgBox h3 {
+    opacity: 0;
+    transition: 0.3s; /* Efek menghilang halus */
+}
+
+.card:hover .bark {
+    opacity: 1;
+    transition: 0.6s;
+}
+
+.card:before {
+    content:'';
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: #BAC1BA;
+    transform-origin: bottom;
+    transform: skewX(-45deg);
+}
+
+.card:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -5px;
+    width: 5px;
+    height: 100%;
+    background: #92A29C;
+    transform-origin: left;
+    transform: skewY(-45deg);
+}
+
+.card .imgBox {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-origin: left;
+    transition: .7s;
+    background-color: #92A29C;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 1; 
+}
+
+.card .bark {
+    position: absolute;
+    inset: 0;
+    background: #e0e1dc;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: .7s;
+}
+
+.card .bark img {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+}
+
+.card .imgBox img {
+    min-width: 75px;
+    max-height: 200px;
+    z-index: 2;
+}
+
+.card .imgBox h2, .card .imgBox h3 {
+    z-index: 2;
+}
+
+.card:hover .imgBox {
+    transform: rotateY(-135deg);
+}
+
+.card:hover .bark {
+    opacity: 1;
+    transition: .6s;
+    box-shadow: 300px 200px 100px rgba(0, 0, 0, .4) inset;
+}
+
+.card .details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    padding: 25px 15px 25px 20px;
+    z-index: -1;
+
+    height: 100%; 
+    max-height: 380px; 
+
+    overflow-y: auto; 
+    overflow-x: hidden;
+    
+    width: 100%;
+    margin-top: 10px;
+}
+
+.card .details::-webkit-scrollbar {
+    width: 4px; 
+}
+
+.card .details::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.card .details::-webkit-scrollbar-thumb {
+    background: rgba(146, 162, 156, 0.5);
+    border-radius: 10px;
+}
+
+.card .details p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+
+.card .details h4 {
+    text-align: center;
+    font-size: 26px;
+    line-height: 1.2;
+    font-family: 'Amatic SC', cursive !important;
+    margin: 5px 0;
+}
+
+
+.color1 { color: #1BBC9B; }
+.color2 { color: #C0392B; }
+
+.text-right {
+    text-align: right;
+    margin-top: 15px !important; 
+}
+
+/* =========================================
+   Mobile & Tablet Layout
+========================================= */
+
+@media (max-width: 1024px) {
+    .slider-img.active {
+        width: 95vw; 
+    }
+    
+    .card-wrapper {
+        padding-left: 100px; 
+    }
+}
+
+@media (max-width: 768px) {
+    .slider-images {
+        flex-direction: column;
+        width: 90%;
+        gap: 10px;
+    }
+
+    .slider-img {
+        width: 100% !important; 
+        height: 70px; 
+    }
+
+    .slider-title {
+        transform: translate(-50%, -50%) rotate(0deg);
+        font-size: 24px;
+    }
+
+    .slider-img.active {
+        height: 550px;
+        width: 100% !important;
+    }
+
+    .card-wrapper {
+        padding-left: 0;
+        padding-top: 50px;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .card {
+        transform: perspective(2000px) scale(0.8);
+        transform-origin: center;
+    }
+
+    .card:hover {
+        transform: perspective(2000px) rotate(10deg) scale(0.85); 
+    }
+
+    .card .details p {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+}
+
+@media (max-width: 380px) {
+    .card {
+        transform: perspective(2000px) scale(0.7); 
+    }
+    
+    .slider-img.active {
+        height: 480px;
+    }
+}
